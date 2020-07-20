@@ -1,0 +1,15 @@
+{
+  "name": "css-grid-like-bootstrap",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "node-sass": "^4.13.1"
+  },
+  "dependencies": {},
+  "scripts": {
+    "build:compressed": "rm -rf css && node-sass scss/grid.scss css/grid.min.css --output-style compressed",
+    "build:expanded": "rm -rf css && node-sass scss/grid.scss css/grid.css --output-style expanded",
+    "build": "rm -rf css && node-sass scss/grid.scss css/grid.css --output-style expanded && node-sass scss/grid.scss css/grid.min.css --output-style compressed",
+    "watch": "node-sass -w scss/ -o watch/"
+  }
+}
