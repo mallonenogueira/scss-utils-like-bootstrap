@@ -1,10 +1,11 @@
 $gutter: 15px;
+$columns: 12;
 
-@mixin createColumns($prefix) {
-  @for $i from 1 through 12 {
-    #{$prefix}#{$i} {
-      flex-basis: $i / 12 * 100%;
-      width: $i / 12 * 100%;
+@mixin createColumns($prefix, $columns, $gutter) {
+  @for $i from 1 through $columns {
+    #{$prefix + $i} {
+      flex-basis: $i / $columns * 100%;
+      width: $i / $columns * 100%;
       padding-left: $gutter;
       padding-right: $gutter;
     }
@@ -24,20 +25,20 @@ $gutter: 15px;
   padding-right: $gutter;
 }
 
-@include createColumns(".col-");
+@include createColumns(".col-", $columns, $gutter);
 
 @media (min-width: 576px) {
-  @include createColumns(".col-sm-");
+  @include createColumns(".col-sm-", $columns, $gutter);
 }
 
 @media (min-width: 768px) {
-  @include createColumns(".col-md-");
+  @include createColumns(".col-md-", $columns, $gutter);
 }
 
 @media (min-width: 992px) {
-  @include createColumns(".col-lg-");
+  @include createColumns(".col-lg-", $columns, $gutter);
 }
 
 @media (min-width: 1200px) {
-  @include createColumns(".col-xl-");
+  @include createColumns(".col-xl-", $columns, $gutter);
 }

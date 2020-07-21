@@ -10,6 +10,6 @@
     "build:compressed": "rm -rf css && node-sass scss/grid.scss css/grid.min.css --output-style compressed",
     "build:expanded": "rm -rf css && node-sass scss/grid.scss css/grid.css --output-style expanded",
     "build": "rm -rf css && node-sass scss/grid.scss css/grid.css --output-style expanded && node-sass scss/grid.scss css/grid.min.css --output-style compressed",
-    "watch": "node-sass -w scss/ -o watch/"
+    "watch": "node-sass -w scss/ -o public/assets/ --output-style expanded"
   }
 }
