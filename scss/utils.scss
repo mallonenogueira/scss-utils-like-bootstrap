@@ -1,0 +1,73 @@
+$min-breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+);
+
+$spacing: (
+  1: 4px,
+  2: 6px,
+  3: 8px,
+  4: 10px,
+);
+
+@mixin responsive-utility(
+  $class-name,
+  $attribute,
+  $breakpoints: $min-breakpoints
+) {
+  #{"." + $class-name + "-" + $attribute} {
+    @content;
+  }
+
+  @each $breakpoint-name, $breakpoint-size in $breakpoints {
+    @media (min-width: $breakpoint-size) {
+      #{"." + $class-name + "-" + $breakpoint-name + "-" + $attribute} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin create-utility($property, $class-name, $values) {
+  @each $name, $attribute in $values {
+    @include responsive-utility($class-name, $name) {
+      #{$property}: #{$attribute};
+    }
+  }
+}
+
+@mixin create-util($property, $class-name, $attributes...) {
+  $map: ();
+
+  @each $attr in $attributes {
+    $map: map-merge($map, (#{$attr}: $attr));
+  }
+
+  @include create-utility($property, $class-name, $map);
+}
+
+@include create-utility(margin, m, $spacing);
+@include create-utility(margin-top, mt, $spacing);
+@include create-utility(margin-bottom, mb, $spacing);
+@include create-utility(margin-left, ml, $spacing);
+@include create-utility(margin-right, mr, $spacing);
+
+@include create-utility(padding, p, $spacing);
+@include create-utility(padding-top, pt, $spacing);
+@include create-utility(padding-bottom, pb, $spacing);
+@include create-utility(padding-left, pl, $spacing);
+@include create-utility(padding-right, pr, $spacing);
+
+@include create-util(display, d, none, flex, block);
+
+@include create-util(
+  justify-content,
+  justify-content,
+  center,
+  flex-end,
+  flex-start,
+  space-around,
+  space-between
+);
